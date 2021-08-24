@@ -1,0 +1,27 @@
+$TTL 86400
+@       IN SOA  helper.example.com. admin.example.com. (
+                2021051400 ;Serial
+                3600 ;Refresh
+                1800 ;Retry
+                604800 ;Expire
+                86400 ;Minimum TTL
+)
+;Name Server Information
+@       IN NS	helper.example.com.
+
+;Reverse lookup for Name Server
+150     IN PTR	helper.example.com.
+
+;PTR Record IP address to HostName
+140     IN PTR	bootstrap.ibm.example.com.
+141     IN PTR	master01.ibm.example.com.
+142     IN PTR	master02.ibm.example.com.
+143     IN PTR	master03.ibm.example.com.
+144     IN PTR	worker01.ibm.example.com.
+145     IN PTR	worker02.ibm.example.com.
+146     IN PTR	worker03.ibm.example.com.
+147     IN PTR	worker04.ibm.example.com.
+148     IN PTR	worker05.ibm.example.com.
+149     IN PTR	worker06.ibm.example.com.
+151     IN PTR	nfs.example.com.
+152     IN PTR	keeper.example.com.
