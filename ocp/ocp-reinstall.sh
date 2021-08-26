@@ -4,7 +4,7 @@ systemctl stop httpd
 rm -rf /var/www/html/ocpinstall
 rm -rf ~/ocpinstall
 mkdir ~/ocpinstall
-cp ~/install/install-config.yaml ~/ocpinstall/
+cp ./install-config.yaml ~/ocpinstall/
 /usr/local/bin/openshift-install create manifests --dir ~/ocpinstall/
 sed -i 's/mastersSchedulable: true/mastersSchedulable: false/' ~/ocpinstall/manifests/cluster-scheduler-02-config.yml
 /usr/local/bin/openshift-install create ignition-configs --dir ~/ocpinstall/
