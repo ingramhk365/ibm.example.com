@@ -14,7 +14,7 @@ $TTL 86400
 helper					IN A		10.122.0.150
 dns					IN CNAME	helper
 dhcp					IN CNAME	helper
-ntp					IN CNAME	helper
+haproxy					IN CNAME	helper
 
 nfs					IN A		10.122.0.151
 keeper					IN A		10.122.0.152
