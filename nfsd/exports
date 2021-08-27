@@ -1,1 +1,2 @@
-/nfsshare/registry *(rw,sync,no_wdelay,no_root_squash)
+/registry *(rw,sync,no_wdelay,no_root_squash)
+/nfsshare *(rw,sync,no_wdelay,no_root_squash)
