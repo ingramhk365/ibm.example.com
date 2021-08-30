@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#dnf install haproxy -y
+dnf install haproxy -y
 
 cp /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.bak
 cp ./haproxy.cfg /etc/haproxy/haproxy.cfg
