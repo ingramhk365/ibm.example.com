@@ -14,7 +14,7 @@ oc create secret generic htpass-secret --from-file=htpasswd=users.htpasswd -n op
 #  name: cluster
 #spec:
 #  identityProviders:
-#    - name: my_htpasswd_provider
+#    - name: htpasswd_provider
 #      mappingMethod: claim
 #      type: HTPasswd
 #      htpasswd:
@@ -23,4 +23,5 @@ oc create secret generic htpass-secret --from-file=htpasswd=users.htpasswd -n op
 oc apply -f htpasswd.cr
 
 # Bind Cluster Admin Role
-oc adm policy add-cluster-role-to-user cluster-admin ocpadmin --rolebinding-name=cluster-admin
+oc adm policy add-cluster-role-to-user cluster-admin ibmadmin --rolebinding-name=cluster-admin
+oc adm policy add-cluster-role-to-user cluster-admin imadmin --rolebinding-name=cluster-admin
