@@ -3,9 +3,9 @@ kind: "PersistentVolumeClaim"
 metadata:
   name: "mysql-pvc"
 spec:
-  storageClassName: nfs
+  storageClassName: block
   accessModes:
     - "ReadWriteOnce"
   resources:
     requests:
-      storage: "1Gi"
+      storage: "2Gi"

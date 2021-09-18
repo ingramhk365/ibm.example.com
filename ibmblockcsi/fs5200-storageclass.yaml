@@ -1,17 +1,17 @@
 kind: StorageClass
 apiVersion: storage.k8s.io/v1
 metadata:
-  name: fs5200
+  name: block
 provisioner: block.csi.ibm.com
 parameters:
   SpaceEfficiency: thin               # Optional: Values applicable for Spectrum Virtualize Family are: thin, compressed, or deduplicated
   pool: Pool0                         # DS8000 Family paramater is pool ID
   csi.storage.k8s.io/provisioner-secret-name: fs5200-secret
-  csi.storage.k8s.io/provisioner-secret-namespace: ibm-storage-csi
+  csi.storage.k8s.io/provisioner-secret-namespace: ibm-block-csi
   csi.storage.k8s.io/controller-publish-secret-name: fs5200-secret
-  csi.storage.k8s.io/controller-publish-secret-namespace: ibm-storage-csi
+  csi.storage.k8s.io/controller-publish-secret-namespace: ibm-block-csi
   csi.storage.k8s.io/controller-expand-secret-name: fs5200-secret
-  csi.storage.k8s.io/controller-expand-secret-namespace: ibm-storage-csi
+  csi.storage.k8s.io/controller-expand-secret-namespace: ibm-block-csi
   csi.storage.k8s.io/fstype: xfs      # Optional: Values ext4/xfs. The default is ext4.
   volume_name_prefix: ibm.example.com # Optional: DS8000 Family maximum prefix length is 5 characters. Maximum prefix length for other systems is 20 characters.
 allowVolumeExpansion: true

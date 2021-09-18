@@ -1,0 +1,48 @@
+# Set isOCP true when installing on OpenShift. false when installing on k8s.
+#
+# To obtain the value for clusterAPIServerips issue one of these commands
+# Kubernetes: kubectl get endpoints -n default -o yaml kubernetes
+# OpenShift:  oc get endpoints -n default -o yaml kubernetes
+# Use all of the provided addresses listed under addresses, add or remove ip addresses as needed
+#
+# To get the CLUSTER_CIDR issue one of these commands and use the displayed IP Address CIDR
+# Kubernetes: kubectl cluster-info dump | grep -m 1 cluster-cidr
+# OpenShift:  oc get network -o yaml | grep -A1 clusterNetwork:
+#
+# If the IBM Spectrum Protect Plus Server is stand-alone, set isServerInstalledOnAnotherCluster to false.
+# If the IBM Spectrum Protect Plus Server is installed on the same OpenShift cluster as this software, 
+# set isServerInstalledOnAnotherCluster to false.
+# If the IBM Spectrum Protect Plus Server is installed on a different OpenShift cluster, 
+# set isServerInstalledOnAnotherCluster to true. Retrieve the IP addresses of the OpenShift cluster
+# hosting the IBM Spectrum Protect Plus Server by running this command on the hosting cluster:   
+# OpenShift: oc get node -o custom-columns=HOST:.metadata.name,IP:.status.addresses[0]
+# Set SPPips to the format "x.y.z.0" where "x.y.z" are the shared values of the IP Addresses.
+#
+# The value for imageRegistry must match the value for DOCKER_REGISTRY_ADDRESS in baas-options.sh
+# The value for imageRegistryNamespace must match the value for DOCKER_REGISTRY_NAMESPACE in baas-options.sh
+#
+# The value for veleroNamespace must match the value for the -n parameter used in the velero install command
+# If you do not specify a value for verleroNamespace, Velero integration is disabled and you can use 
+# Container Backup Support to protect only persistent volume claims (PVCs).
+
+# Change license to true to indicate that you have read and agree to the
+# IBM Spectrum Protect Plus Capacity 10.1.8 license agreements at: https://ibm.biz/BdquzE
+license: true
+isOCP: true
+clusterName: ibm.example.com
+networkPolicy:
+  clusterAPIServerips:
+    - 10.122.0.141
+    - 10.122.0.142
+    - 10.122.0.143
+  clusterAPIServerport: 6443
+  clusterCIDR: 10.128.0.0/14
+  isServerInstalledOnAnotherCluster: false
+SPPfqdn: spp.example.com
+SPPips: 10.122.0.153
+SPPport: 443
+productLoglevel: INFO
+imageRegistry: cp.icr.io/cp
+imageRegistryNamespace: sppc
+minioStorageClass: block
+veleroNamespace: spp-velero

@@ -2,11 +2,11 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: fs5200-pvc
-  namespace: ibm-storage-csi
+  namespace: ibm-block-csi
 spec:
   accessModes:
   - ReadWriteOnce
   resources:
     requests:
       storage: 2Gi
-  storageClassName: fs5200
+  storageClassName: block

@@ -1,0 +1,11 @@
+#--------------------------------------
+# Filename: entitled-registry-repo.yaml
+#--------------------------------------
+apiVersion: helm.openshift.io/v1beta1
+kind: HelmChartRepository
+metadata:
+  name: entitledregistry
+spec:
+  name: entitledregistry
+  connectionConfig:
+    url: https://raw.githubusercontent.com/IBM/charts/master/repo/ibm-helm

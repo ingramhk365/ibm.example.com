@@ -1,0 +1,11 @@
+apiVersion: snapshot.storage.k8s.io/v1beta1
+kind: VolumeSnapshotClass
+metadata:
+  name: snapshotclass
+driver: block.csi.ibm.com
+deletionPolicy: Delete
+parameters:
+  csi.storage.k8s.io/snapshotter-secret-name: fs5200-secret
+  csi.storage.k8s.io/snapshotter-secret-namespace: ibm-block-csi
+  snapshot_name_prefix: snapshot   # Optional.
+#  pool: pool0                     # Optional. Use to create the snapshot on a different pool than the source.
