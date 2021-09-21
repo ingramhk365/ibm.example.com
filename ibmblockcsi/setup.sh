@@ -3,3 +3,8 @@ oc new-project ibm-block-csi
 oc apply -f ./99-ibm-sttach.yaml
 oc apply -f ./fs5200-secret.yaml
 oc apply -f ./fs5200-storageclass.yaml
+
+# For Snapshot
+oc apply -f ./fs5200-volumesnapshotclass.yaml
+oc create -f ./crd
+oc create -f ./snapshot-controller
