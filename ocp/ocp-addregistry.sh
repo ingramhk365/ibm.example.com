@@ -25,7 +25,7 @@ oc edit configs.imageregistry.operator.openshift.io
 #   rolloutStrategy: RollingUpdate
 #   storage:
 #     pvc:
-#     claim:
+#       claim:
 #   unsupportedConfigOverrides: null
 
 # oc apply -f ./registry.yaml

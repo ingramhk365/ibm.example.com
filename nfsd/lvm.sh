@@ -6,9 +6,10 @@ mkfs.xfs /dev/nfs/registry
 mkfs.xfs /dev/nfs/nfsshare
 mkdir /registry
 mkdir /nfsshare
-echo '/dev/mapper/nfs-registry\t/registry\txfs\tdefaults\t0 0' >> /etc/fstab
-echo '/dev/mapper/nfs-nfsshare\t/nfsshare\txfs\tdefaults\t0 0' >> /etc/fstab
-mount /nfs-nfsshare /nfsshare
+echo '/dev/mapper/nfs-registry /registry xfs defaults 0 0' >> /etc/fstab
+echo '/dev/mapper/nfs-nfsshare /nfsshare xfs defaults 0 0' >> /etc/fstab
+mount /registry
+mount /nfsshare
 chown -R nobody:nobody /registry
 chown -R nobody:nobody /nfsshare
 chmod -R 777 /registry
