@@ -21,7 +21,8 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: block
+#  storageClassName: block
+  storageClassName: nfs
   resources:
     requests:
       storage: 20Gi

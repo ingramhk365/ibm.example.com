@@ -1,16 +1,17 @@
+curl https://docs.kasten.io/tools/k10_primer.sh | bash
+
+helm repo add kasten https://charts.kasten.io
+helm repo update
+helm repo list
 
 
 # oc annotate volumesnapshotclass <Snapshot Storage Class> k10.kasten.io/is-snapshot-class=true
 oc annotate volumesnapshotclass snapshotclass k10.kasten.io/is-snapshot-class=true
 
-# curl https://docs.kasten.io/tools/k10_primer.sh | bash
 
 # oc new-project kasten-io
-# helm repo add kasten https://charts.kasten.io
-# helm repo update
-# helm repo list
 
-# helm install k10 kasten/k10 --namespace=kasten-io --set scc.create=true
+# helm install k10 kasten/k10 --namespace=kasten-io --set scc.create=true --set route.enable=true --set auth.tokenAuth.enabled=true
 
 helm upgrade k10 kasten/k10 --namespace=kasten-io \
 --reuse-values \
@@ -21,3 +22,7 @@ helm upgrade k10 kasten/k10 --namespace=kasten-io \
 
 #oc -n kasten-io port-forward svc/gateway 8080:8000
 kubectl --namespace kasten-io port-forward service/gateway 8080:8000
+
+
+# Uninstall K10
+# helm uninstall k10 --namespace=kasten-io
