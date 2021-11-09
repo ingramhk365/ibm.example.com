@@ -6,7 +6,7 @@ spec:
   accessModes:
     - ReadWriteMany
   capacity:
-    storage: 450Gi
+    storage: 480Gi
   persistentVolumeReclaimPolicy: Retain
   nfs:
     path: /registry
