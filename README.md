@@ -1,4 +1,4 @@
-$ ibm.example.com \n
+$ ibm.example.com <br />
 git clone https://github.com/ingramhk365/ibm.example.com.git
 
 How to git push
