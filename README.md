@@ -16,7 +16,7 @@ Copy the token generated and it will not be seen again <br />
 Under ibm.example.com directory, git push, login as ingramhk365 and password as the token <br />
 
 <br />
-<U>Update history</U> <br />
+Update history <br />
 2021-11-02 <br />
 2022-06-15 updated <br />
 2022-06-24 updated <br />
