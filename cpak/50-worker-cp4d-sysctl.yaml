@@ -1,0 +1,17 @@
+apiVersion: machineconfiguration.openshift.io/v1
+kind: MachineConfig
+metadata:
+  labels:
+    machineconfiguration.openshift.io/role: worker
+  name: 50-worker-cp4d-sysctl
+spec:
+  config:
+    ignition:
+      version: 2.2.0
+  storage:
+    files:
+    - contents:
+        source: data:,vm.max_map_count%20%3D%20262144%0Akernel.msgmax%20%3D%2065536%0Akernel.msgmnb%20%3D%2065536%0Akernel.msgmni%20%3D%2032768%0Akernel.shmmax%20%3D%2021474836480%0Akernel.shmall%20%3D%2010485760%0Akernel.shmmni%20%3D%205120%0Akernel.sem%20%3D%20250%201024000%20100%2016384%0A
+      filesystem: root
+      mode: 0644
+      path: /etc/sysctl.d/50-worker-cp4d-sysctl.conf

@@ -1,0 +1,66 @@
+{
+    "apiVersion": "v1",
+    "kind": "Namespace",
+    "metadata": {
+        "annotations": {
+            "openshift.io/description": "",
+            "openshift.io/display-name": "",
+            "openshift.io/requester": "system:admin",
+            "openshift.io/sa.scc.mcs": "s0:c25,c5",
+            "openshift.io/sa.scc.supplemental-groups": "1000610000/10000",
+            "openshift.io/sa.scc.uid-range": "1000610000/10000"
+        },
+        "creationTimestamp": "2021-11-10T03:57:19Z",
+        "deletionTimestamp": "2021-11-26T09:25:36Z",
+        "labels": {
+            "kubernetes.io/metadata.name": "ibm-common-services",
+            "managed-by-common-service-webhook": "true"
+        },
+        "name": "ibm-common-services",
+        "resourceVersion": "9170704",
+        "uid": "31036872-3a98-47ad-8e79-dfee9a87b0b8"
+    },
+    "spec": {
+        "finalizers": []
+    },
+    "status": {
+        "conditions": [
+            {
+                "lastTransitionTime": "2021-11-26T09:25:48Z",
+                "message": "All resources successfully discovered",
+                "reason": "ResourcesDiscovered",
+                "status": "False",
+                "type": "NamespaceDeletionDiscoveryFailure"
+            },
+            {
+                "lastTransitionTime": "2021-11-26T09:25:48Z",
+                "message": "All legacy kube types successfully parsed",
+                "reason": "ParsedGroupVersions",
+                "status": "False",
+                "type": "NamespaceDeletionGroupVersionParsingFailure"
+            },
+            {
+                "lastTransitionTime": "2021-11-26T09:25:48Z",
+                "message": "All content successfully deleted, may be waiting on finalization",
+                "reason": "ContentDeleted",
+                "status": "False",
+                "type": "NamespaceDeletionContentFailure"
+            },
+            {
+                "lastTransitionTime": "2021-11-26T09:25:48Z",
+                "message": "Some resources are remaining: namespacescopes.operator.ibm.com has 5 resource instances, operandrequests.operator.ibm.com has 4 resource instances",
+                "reason": "SomeResourcesRemain",
+                "status": "True",
+                "type": "NamespaceContentRemaining"
+            },
+            {
+                "lastTransitionTime": "2021-11-26T09:25:48Z",
+                "message": "Some content in the namespace has finalizers remaining: finalizer.nss.operator.ibm.com in 5 resource instances, finalizer.request.ibm.com in 4 resource instances",
+                "reason": "SomeFinalizersRemain",
+                "status": "True",
+                "type": "NamespaceFinalizersRemaining"
+            }
+        ],
+        "phase": "Terminating"
+    }
+}

@@ -21,8 +21,8 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-#  storageClassName: block
-  storageClassName: nfs
+  storageClassName: ocs-storagecluster-cephfs
+#  storageClassName: managed-nfs-storage
   resources:
     requests:
       storage: 20Gi

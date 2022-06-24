@@ -28,9 +28,6 @@ storage_option = [
 # The crio.runtime table contains settings pertaining to the OCI runtime used
 # and options for how to set up and manage the OCI runtime.
 [crio.runtime]
-default_ulimits = [
-        "nofile=66560:66560"
-]
 
 # If true, SELinux will be used for pod separation on the host.
 selinux = true
@@ -53,5 +50,3 @@ enable_metrics = true
 # The port on which the metrics server will listen.
 metrics_port = 9537
 
-# Maximum number of processes allowed in a container
-pids_limit = 12288

@@ -1,0 +1,319 @@
+### Projects
+oc new-project ibm-common-services
+oc new-project cpd-instance
+
+### Catalog Source
+cat <<EOF |oc apply -f -
+apiVersion: operators.coreos.com/v1alpha1
+kind: CatalogSource
+metadata:
+  name: ibm-operator-catalog
+  namespace: openshift-marketplace
+spec:
+  displayName: "IBM Operator Catalog" 
+  publisher: IBM
+  sourceType: grpc
+  image: icr.io/cpopen/ibm-operator-catalog:latest
+  updateStrategy:
+    registryPoll:
+      interval: 45m
+EOF
+
+cat <<EOF |oc apply -f -
+apiVersion: operators.coreos.com/v1alpha1
+kind: CatalogSource
+metadata:
+  name: ibm-db2uoperator-catalog
+  namespace: openshift-marketplace
+spec:
+  sourceType: grpc
+  image: docker.io/ibmcom/ibm-db2uoperator-catalog:latest
+  imagePullPolicy: Always
+  displayName: IBM Db2U Catalog
+  publisher: IBM
+  updateStrategy:
+    registryPoll:
+      interval: 45m
+EOF
+
+
+### Operator Group
+cat <<EOF |oc apply -f -
+apiVersion: operators.coreos.com/v1alpha2
+kind: OperatorGroup
+metadata:
+  name: operatorgroup
+  namespace: ibm-common-services
+spec:
+  targetNamespaces:
+  - ibm-common-services
+EOF
+
+
+### IBM Common Service Operator Subscription
+cat <<EOF |oc apply -f -
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: cpd-operator
+  namespace: ibm-common-services
+spec:
+  channel: v2.0
+  installPlanApproval: Automatic
+  name: cpd-platform-operator
+  source: ibm-operator-catalog
+  sourceNamespace: openshift-marketplace
+EOF
+### Cloud Pak for Dat Platform Operator installed
+### IBM Cloud Pak foundational services Operator installed
+### IBM NamespaceScope Operator installed
+### Operand Deployment Lifecycle Manager Operator installed
+
+
+### Watson Knowledge Catalog Operator Subscription
+cat <<EOF |oc apply -f -
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  labels:
+    app.kubernetes.io/instance:  ibm-cpd-wkc-operator-catalog-subscription
+    app.kubernetes.io/managed-by: ibm-cpd-wkc-operator
+    app.kubernetes.io/name:  ibm-cpd-wkc-operator-catalog-subscription
+  name: ibm-cpd-wkc-operator-catalog-subscription
+  namespace: ibm-common-services
+spec:
+    channel: v1.0
+    installPlanApproval: Automatic
+    name: ibm-cpd-wkc
+    source: ibm-operator-catalog
+    sourceNamespace: openshift-marketplace
+EOF
+### WKC Services Operator installed
+
+
+### DataStage Operator Subscription
+cat <<EOF |oc apply -f -
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: ibm-datastage-operator
+  namespace: ibm-common-services
+spec:
+  channel: v1.0
+  installPlanApproval: Automatic
+  name: ibm-datastage-operator
+  source: ibm-operator-catalog
+  sourceNamespace: openshift-marketplace
+EOF
+### IBM DataStage Operator installed
+
+
+### Data Virtualization Operator Subscription
+cat <<EOF |oc apply -f -
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: ibm-dv-operator-catalog-subscription
+  namespace: ibm-common-services
+spec:
+  channel: v1.7
+  installPlanApproval: Automatic
+  name: ibm-dv-operator
+  source: ibm-operator-catalog
+  sourceNamespace: openshift-marketplace
+EOF
+### IBM Data Virtualization Operator installed
+
+
+### Watson Studio Operator Subscription
+cat <<EOF |oc apply -f -
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  annotations:
+  name: ibm-cpd-ws-operator-catalog-subscription
+  namespace: ibm-common-services
+spec:
+  channel: v2.0
+  installPlanApproval: Automatic
+  name: ibm-cpd-wsl
+  source: ibm-operator-catalog
+  sourceNamespace: openshift-marketplace
+EOF
+### Wation Studio Operator installed
+
+
+### Watson Machine Learning Operator Subscription
+cat <<EOF |oc apply -f -
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  labels:
+    app.kubernetes.io/instance: ibm-cpd-wml-operator-subscription
+    app.kubernetes.io/managed-by: ibm-cpd-wml-operator
+    app.kubernetes.io/name: ibm-cpd-wml-operator-subscription
+  name: ibm-cpd-wml-operator-subscription
+  namespace: ibm-common-services
+spec:
+    channel: v1.1
+    installPlanApproval: Automatic
+    name: ibm-cpd-wml-operator
+    source: ibm-operator-catalog
+    sourceNamespace: openshift-marketplace
+EOF
+
+
+### OpenScale (AutoAI) Operator Subscription
+cat <<EOF |oc apply -f -
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: ibm-watson-openscale-operator-subscription
+  labels:
+  app.kubernetes.io/instance: ibm-watson-openscale-operator-subscription
+  app.kubernetes.io/managed-by: ibm-watson-openscale-operator
+  app.kubernetes.io/name: ibm-watson-openscale-operator-subscription
+  namespace: ibm-common-services
+spec:
+  channel: v1.5
+  installPlanApproval: Automatic
+  name: ibm-cpd-wos
+  source: ibm-operator-catalog
+  sourceNamespace: openshift-marketplace
+EOF
+
+oc get sub -n ibm-common-services ibm-watson-openscale-operator-subscription -o jsonpath='{.status.installedCSV} {"\n"}'
+
+
+### SPSS Operator Subscription
+cat <<EOF |oc apply -f -
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  labels:
+    app.kubernetes.io/instance: ibm-cpd-spss-operator-catalog-subscription
+    app.kubernetes.io/managed-by: ibm-cpd-spss-operator
+    app.kubernetes.io/name: ibm-cpd-spss-operator-catalog-subscription
+  name: ibm-cpd-spss-operator-catalog-subscription
+  namespace: ibm-common-services
+spec:
+    channel: v1.0
+    installPlanApproval: Automatic
+    name: ibm-cpd-spss
+    source: ibm-operator-catalog
+    sourceNamespace: openshift-marketplace
+EOF
+
+oc get sub -n ibm-common-services ibm-cpd-spss-operator-catalog-subscription -o jsonpath='{.status.installedCSV} {"\n"}'
+
+
+### Watson Machine Learning Operator Subscription
+cat <<EOF |oc apply -f -
+apiVersion: wml.cpd.ibm.com/v1beta1
+kind: WmlBase
+metadata:
+  name: wml-cr
+  namespace: cpd-instance
+  labels:
+    app.kubernetes.io/instance: wml-cr
+    app.kubernetes.io/managed-by: ibm-cpd-wml-operator
+    app.kubernetes.io/name: ibm-cpd-wml-operator
+spec:
+  ignoreForMaintenance: false
+  scaleConfig: small
+  license:
+    accept: true
+    license: Standard
+  version: 4.0.9
+  storageVendor: ""
+  storageClass: managed-nfs-storage
+EOF
+
+oc get -n cpd-instance WmlBase wml-cr -o jsonpath='{.status.wmlStatus} {"\n"}'
+
+
+### Install CPD Custom Resource
+cat <<EOF |oc apply -f -
+apiVersion: operator.ibm.com/v1alpha1
+kind: OperandRequest
+metadata:
+  name: empty-request
+  namespace: cpd-instance
+spec:
+  requests: []
+EOF
+
+cat <<EOF |oc apply -f -
+apiVersion: cpd.ibm.com/v1
+kind: Ibmcpd
+metadata:
+  name: ibmcpd-cr
+  namespace: cpd-instance
+spec:
+  license:
+    accept: true
+    license: Standard
+  storageClass: managed-nfs-storage
+  zenCoreMetadbStorageClass: managed-nfs-storage
+EOF
+### IBM Cert Manager Operator installed
+### IBM Zen Service Operator installed
+
+
+### Create Watson Studio Custom Resource
+cat <<EOF |oc apply -f -
+apiVersion: ws.cpd.ibm.com/v1beta1
+kind: WS
+metadata:
+  name: ws-cr
+  namespace: cpd-instance
+spec:
+  license:
+    accept: true
+    license: Standard
+  storageClass: managed-nfs-storage
+EOF
+### Common Core Service Operator installed
+
+
+### Install OpenScale
+cat <<EOF |oc apply -f -
+apiVersion: wos.cpd.ibm.com/v1
+kind: WOService
+metadata:
+  name: aiopenscale
+  namespace: cpd-instance
+spec:
+  scaleConfig: small
+  license:
+    accept: true
+    license: Standard
+  version: 4.0.9
+  type: service
+  storageClass: managed-nfs-storage
+EOF
+
+oc get -n cpd-instance WOService aiopenscale -o jsonpath='{.status.wosStatus} {"\n"}'
+
+
+# Install SPSS
+cat <<EOF |oc apply -f -
+apiVersion: spssmodeler.cpd.ibm.com/v1
+kind: Spss
+metadata:
+  name: spss-sample
+  namespace: cpd-instance
+  labels:
+    app.kubernetes.io/instance: ibm-cpd-spss-operator
+    app.kubernetes.io/managed-by: ibm-cpd-spss-operator
+    app.kubernetes.io/name: ibm-cpd-spss-operator
+spec:
+  license:
+    accept: true
+    license: Standard
+  storageClass: managed-nfs-storage
+  scaleConfig: small
+EOF
+
+
+oc get -n cpd-instance Spss spss-sample -o jsonpath='{.status.spssmodelerStatus} {"\n"}'

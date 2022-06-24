@@ -1,0 +1,20 @@
+apiVersion: local.storage.openshift.io/v1
+kind: LocalVolume
+metadata:
+  name: local-disks
+  namespace: openshift-local-storage
+spec:
+  nodeSelector:
+    nodeSelectorTerms:
+      - matchExpressions:
+          - key: kubernetes.io/hostname
+            operator: In
+            values:
+            - worker01.ibm.example.local
+            - worker02.ibm.example.local
+            - worker03.ibm.example.local
+  storageClassDevices:
+    - storageClassName: localblock-sc
+      volumeMode: Block
+      devicePaths:
+        - /dev/sdb
